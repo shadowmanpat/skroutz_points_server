@@ -1,7 +1,7 @@
 /** source/controllers/posts.ts */
 import { Request, Response, NextFunction } from "express";
 import axios, { AxiosResponse } from "axios";
-const url = require('url');
+const url = require("url");
 
 import cheerio from "cheerio";
 // interface VersionModel {
@@ -19,18 +19,15 @@ const getSkroutzPoints = async (
   console.log(queryObject);
   console.log(req.url);
   axios
-  .get(skroutzBase+req.url)
-  .then(result => {
-  
-    return res.status(200).json(
-      result.data
-    );
-  })
-  .catch(error => {
-    return res.status(400).json({
-      result: error,
+    .get(skroutzBase + req.url)
+    .then((result) => {
+      return res.status(200).json(result.data);
+    })
+    .catch((error) => {
+      return res.status(400).json({
+        result: error,
+      });
     });
-  });
 };
 
 export default { getSkroutzPoints };
