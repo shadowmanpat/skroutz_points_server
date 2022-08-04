@@ -2,7 +2,6 @@ import express from "express";
 import controller from "../controllers/apiController";
 const router = express.Router();
 
-router.get("/android", controller.getAndroidVersion);
-router.get("/iOS", controller.getIOSVersion);
+router.get("/fetch_skroutz_points", controller.getSkroutzPoints);
 
 export = router;

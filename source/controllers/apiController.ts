@@ -1,37 +1,36 @@
 /** source/controllers/posts.ts */
 import { Request, Response, NextFunction } from "express";
 import axios, { AxiosResponse } from "axios";
+const url = require('url');
+
 import cheerio from "cheerio";
 // interface VersionModel {
 //     version: String;
 //     notes: String;
 // }
 
-// getting all posts
-const getAndroidVersion = async (
+var skroutzBase = "https://www.skroutz.gr/checkout";
+const getSkroutzPoints = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  var gplay = require("google-play-scraper");
-
-  var result = await gplay.app({ appId: "com.myjobnow.mjn_crew.prod" });
-  return res.status(200).json({
-    result: result,
+  const queryObject = url.parse(req.url, true).query;
+  console.log(queryObject);
+  console.log(req.url);
+  axios
+  .get(skroutzBase+req.url)
+  .then(result => {
+  
+    return res.status(200).json({
+      result: result.data,
+    });
+  })
+  .catch(error => {
+    return res.status(400).json({
+      result: error,
+    });
   });
 };
 
-const getIOSVersion = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  var store = require("app-store-scraper");
-
-  var result = await store.app({ id: 1591603398, country: "GR" });
-  return res.status(200).json({
-    result: result,
-  });
-};
-
-export default { getAndroidVersion, getIOSVersion };
+export default { getSkroutzPoints };
