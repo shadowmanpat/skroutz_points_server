@@ -69,7 +69,6 @@ class _MainAppPageState extends State<MainAppPage> {
             ExpandableListWidget(getDataFiltered(),zoomToPoint),
             Stack(
                 children:[
-
                   MapPointsWidget(getDataFiltered(),zoomToPointController),
                   Align(
                       alignment: AlignmentDirectional.topStart,
@@ -99,12 +98,12 @@ class _MainAppPageState extends State<MainAppPage> {
                                 onChanged: (value) {
                                   setState(() {
                                     isSwipboxSwitched = value;
-                                    print(isSwipboxSwitched);
                                   });
                                 },
                                 activeTrackColor: Colors.lightGreenAccent,
                                 activeColor: Colors.green,
                               ),
+
                             ],
                           ),
                         ),
@@ -118,6 +117,11 @@ class _MainAppPageState extends State<MainAppPage> {
   }
   zoomToPoint(SkroutzPoint point){
     zoomToPointController.zoom(point);
+  }
+
+  void searchData(String s) {
+
+    print("search s $s");
   }
 
 }
