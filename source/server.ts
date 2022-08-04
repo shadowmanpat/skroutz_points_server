@@ -34,7 +34,7 @@ router.use((req, res, next) => {
 /** Routes */
 // router.use('/', postRoutes);
 router.use("/api", apiRoutes);
-router.use("/", express.static("webapp/build/web"));
+router.use("/", express.static("skroutz_points_app/build/web"));
 /** Error handling */
 router.use((req, res, next) => {
   const error = new Error("not found");
