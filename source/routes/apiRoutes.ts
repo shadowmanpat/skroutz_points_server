@@ -4,4 +4,4 @@ const router = express.Router();
 
 router.get("/fetch_skroutz_points", controller.getSkroutzPoints);
 
-export = router;
+export default  router;
