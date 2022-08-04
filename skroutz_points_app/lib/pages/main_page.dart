@@ -16,6 +16,23 @@ class _MainAppPageState extends State<MainAppPage> {
   ZoomToPointController zoomToPointController = ZoomToPointController();
   List<SkroutzPoint> data = [];
 
+  bool isCleveronSwitched = false;
+  bool isSwipboxSwitched = false;
+
+  List<SkroutzPoint> getDataFiltered(){
+    List<SkroutzPoint> toReturn = [];
+    if (isCleveronSwitched){
+      toReturn.addAll(data.where((element) => element.isCleveron));
+    }
+    if (isSwipboxSwitched){
+      toReturn.addAll(data.where((element) => element.isSwipbox));
+    }
+    if(isCleveronSwitched == false && isSwipboxSwitched == false){
+      return data;
+    }else{
+      return toReturn;
+    }
+  }
   @override
   initState() {
     super.initState();
@@ -49,8 +66,51 @@ class _MainAppPageState extends State<MainAppPage> {
           ),
           controller: SplitViewController(weights: [0.3, 0.7],limits: [WeightLimit(min:0.3,max: 0.6)]),
           children: [
-            ExpandableListWidget(data,zoomToPoint),
-            MapPointsWidget(data,zoomToPointController),
+            ExpandableListWidget(getDataFiltered(),zoomToPoint),
+            Stack(
+                children:[
+
+                  MapPointsWidget(getDataFiltered(),zoomToPointController),
+                  Align(
+                      alignment: AlignmentDirectional.topStart,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          padding: EdgeInsets.all(6),
+                          color: Colors.white,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text("Cleveron"),   Switch(
+                                value: isCleveronSwitched,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isCleveronSwitched = value;
+                                    print(isCleveronSwitched);
+                                  });
+                                },
+                                activeTrackColor: Colors.lightGreenAccent,
+                                activeColor: Colors.green,
+                              ),
+                              Divider(),
+                              Text("Swipbox"),
+                              Switch(
+                                value: isSwipboxSwitched,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isSwipboxSwitched = value;
+                                    print(isSwipboxSwitched);
+                                  });
+                                },
+                                activeTrackColor: Colors.lightGreenAccent,
+                                activeColor: Colors.green,
+                              ),
+                            ],
+                          ),
+                        ),
+                      )),
+                ] ,
+            ),
           ],
         ),
       ),
