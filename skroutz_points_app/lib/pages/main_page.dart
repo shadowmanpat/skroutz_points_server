@@ -25,7 +25,7 @@ class _MainAppPageState extends State<MainAppPage> {
   void getPoints() async{
     var results = await fetchPoints(lat: 38.04591429362779,lng:23.505545947811747, radius: 100000000.0  );
     setState(() {
-      data = results.skroutzPoints?? [];
+      data = results.skroutzPoints?.where((element) => element.active == true).toList()?? [];
     });
   }
 

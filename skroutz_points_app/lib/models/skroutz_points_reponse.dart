@@ -38,12 +38,14 @@ extension ListSkroutsExtx on List<SkroutzPoint> {
   LatLngBounds  getMaxLat() {
 
     try{
-      var maxLat = this.map((e) => e.location![0]).reduce(max);
-      var minLat = this.map((e) => e.location![0]).reduce(min);
-      var maxLng = this.map((e) => e.location![1]).reduce(max);
-      var minLng = this.map((e) => e.location![1]).reduce(min);
-      print("mylist");
-      return LatLngBounds(LatLng(minLat,minLng), LatLng(maxLat,maxLng));
+      var maxLat = this.map((e) => e.location![1]).reduce(max);
+      var minLat = this.map((e) => e.location![1]).reduce(min);
+      var maxLng = this.map((e) => e.location![0]).reduce(max);
+      var minLng = this.map((e) => e.location![0]).reduce(min);
+      print(" minLat $minLat maxLat $maxLat minLng $minLng maxLng $maxLng ");
+      print("mylist ${LatLngBounds(LatLng(minLat,minLng), LatLng(maxLat,maxLng))}");
+      // return LatLngBounds(LatLng(35.01186,19.91975), LatLng(41.50306,28.2225));
+      return LatLngBounds(LatLng(minLat -1,minLng-0.5), LatLng(maxLat+1,maxLng+0.5));
     }catch(e){
       print("error $e");
       return LatLngBounds(LatLng(35.01186,19.91975), LatLng(41.50306,28.2225));

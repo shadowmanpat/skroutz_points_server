@@ -15,7 +15,7 @@ class ExpandableListWidget extends StatelessWidget {
     }
     return  Column(
       children: [
-        Text("All: ${data.length}, Cleveron: ${data.cleveronCount} Swipbox: ${data.swipboxCount}",
+        Text("All points: ${data.length}, Cleveron: ${data.cleveronCount} Swipbox: ${data.swipboxCount}",
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 20
@@ -44,7 +44,6 @@ class ExpandableListWidget extends StatelessWidget {
           Text( "${point.streetName??""} ${point.streetNumber??""} ${point.city??""} ${point.zip??""} ${point.region??""}"),
           Text( "Weekday ${point.weekdayWorkingHours??""}"),
           Text( "Weekend ${point.weekendWorkingHours??""}"),
-          Text( "${point.active == true? "Active" : "Inactive"}"),
         ]
     );
   }
