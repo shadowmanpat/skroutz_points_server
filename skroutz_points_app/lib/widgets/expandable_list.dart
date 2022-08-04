@@ -15,7 +15,7 @@ class ExpandableListWidget extends StatelessWidget {
     }
     return  Column(
       children: [
-        Text("Count: ${data.length}",
+        Text("All: ${data.length}, Cleveron: ${data.cleveronCount} Swipbox: ${data.swipboxCount}",
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 20
@@ -32,34 +32,19 @@ class ExpandableListWidget extends StatelessWidget {
     );
   }
 
-  Widget _drawer (List<SkroutzPoint> data){
-    return Drawer(
-        child: SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                UserAccountsDrawerHeader(margin: EdgeInsets.only(bottom: 0.0),
-                    accountName: Text('demo'), accountEmail: Text('demo@webkul.com')),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: data.length,
-                  itemBuilder:(context, index){return _buildList(data[index]);},)
-              ],
-            ),
-          ),
-        ));
-  }
   Widget _buildList(SkroutzPoint point) {
     return ExpansionTile(
       // leading: Icon(list.icon),
-      leading: Text(point.model??""),
+      leading: Text(point.isCleveron == true ?"Cleveron": "Swipbpx"),
       title: Text(
         point.name ??"",
         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
         children: [
-          Text(point.streetName??""),
+          Text( "${point.streetName??""} ${point.streetNumber??""} ${point.city??""} ${point.zip??""} ${point.region??""}"),
+          Text( "Weekday ${point.weekdayWorkingHours??""}"),
+          Text( "Weekend ${point.weekendWorkingHours??""}"),
+          Text( "${point.active == true? "Active" : "Inactive"}"),
         ]
     );
   }

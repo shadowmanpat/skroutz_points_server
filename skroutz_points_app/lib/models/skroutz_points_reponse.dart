@@ -1,3 +1,8 @@
+import 'dart:math';
+
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
+
 class SkroutzPointsResponse {
   List<SkroutzPoint>? skroutzPoints;
 
@@ -22,6 +27,34 @@ class SkroutzPointsResponse {
   }
 }
 
+
+extension ListSkroutsExtx on List<SkroutzPoint> {
+
+  int? get cleveronCount => where((o) => o.isCleveron).toList().length;
+  int? get swipboxCount => where((o) => o.isSwipbox).toList().length;
+
+
+//Lat-long coorditates for cities in Greece are in range: Latitude from 35.01186 to 41.50306 and longitude from 19.91975 to 28.2225.
+  LatLngBounds  getMaxLat() {
+
+    try{
+      var maxLat = this.map((e) => e.location![0]).reduce(max);
+      var minLat = this.map((e) => e.location![0]).reduce(min);
+      var maxLng = this.map((e) => e.location![1]).reduce(max);
+      var minLng = this.map((e) => e.location![1]).reduce(min);
+      print("mylist");
+      return LatLngBounds(LatLng(minLat,minLng), LatLng(maxLat,maxLng));
+    }catch(e){
+      print("error $e");
+      return LatLngBounds(LatLng(35.01186,19.91975), LatLng(41.50306,28.2225));
+    }
+  }
+  void talk() {
+    print('meow');
+  }
+
+}
+
 class SkroutzPoint {
   String? id;
   String? type;
@@ -38,6 +71,8 @@ class SkroutzPoint {
   bool? active;
   String? model;
 
+  bool get isCleveron => model == "Cleveron";
+  bool get isSwipbox => model == "SwipboxInfinity";
   SkroutzPoint(
       {this.id,
         this.type,

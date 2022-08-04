@@ -47,7 +47,7 @@ class _MainAppPageState extends State<MainAppPage> {
           ),
           children: [
             ExpandableListWidget(data),
-            MapPointsWidget(),
+            MapPointsWidget(data),
 
           ],
           controller: SplitViewController(weights: [0.3, 0.7],limits: [WeightLimit(min:0.3,max: 0.6)]),
