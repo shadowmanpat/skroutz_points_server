@@ -38,6 +38,7 @@ dependencies:
   intl: ^0.17.0
   url_launcher: ^6.1.5
   split_view: ^3.1.0
+  flutter_map: ^2.2.0
 
 dev_dependencies:
   flutter_test:

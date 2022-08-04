@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:skroutz_points_app/models/skroutz_points_reponse.dart';
 import 'package:skroutz_points_app/services/api.dart';
 import 'package:skroutz_points_app/widgets/expandable_list.dart';
+import 'package:skroutz_points_app/widgets/map_points_widget.dart';
 import 'package:split_view/split_view.dart';
 
 class MainAppPage extends StatefulWidget {
@@ -46,11 +47,10 @@ class _MainAppPageState extends State<MainAppPage> {
           ),
           children: [
             ExpandableListWidget(data),
-            Center(
-              child: Text("Map here"),
-            )
+            MapPointsWidget(),
+
           ],
-          controller: SplitViewController(limits: [WeightLimit(min:0.3,max: 0.6)]),
+          controller: SplitViewController(weights: [0.3, 0.7],limits: [WeightLimit(min:0.3,max: 0.6)]),
         ),
       ),
     );
