@@ -3,8 +3,9 @@ import 'package:skroutz_points_app/models/skroutz_points_reponse.dart';
 
 class ExpandableListWidget extends StatelessWidget {
 
-  const ExpandableListWidget(this.data ,{Key? key}) : super(key: key);
+   const ExpandableListWidget(this.data, this.zoomToPoint ,{Key? key}) : super(key: key);
   final List<SkroutzPoint> data;
+  final Function(SkroutzPoint point) zoomToPoint;
   @override
   Widget build(BuildContext context) {
 
@@ -23,6 +24,7 @@ class ExpandableListWidget extends StatelessWidget {
         Divider(),
         Expanded(
           child: ListView.builder(
+
             itemCount: data.length,
             itemBuilder: (BuildContext context, int index) =>
                 _buildList(data[index]),
@@ -34,6 +36,12 @@ class ExpandableListWidget extends StatelessWidget {
 
   Widget _buildList(SkroutzPoint point) {
     return ExpansionTile(
+      onExpansionChanged: (opened){
+        print("opened $opened");
+        if (opened){
+          zoomToPoint(point);
+        }
+      },
       // leading: Icon(list.icon),
       leading: Text(point.isCleveron == true ?"Cleveron": "Swipbpx"),
       title: Text(

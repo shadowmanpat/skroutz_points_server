@@ -13,7 +13,7 @@ class MainAppPage extends StatefulWidget {
 }
 
 class _MainAppPageState extends State<MainAppPage> {
-
+  ZoomToPointController zoomToPointController = ZoomToPointController();
   List<SkroutzPoint> data = [];
 
   @override
@@ -31,12 +31,14 @@ class _MainAppPageState extends State<MainAppPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text("Skroutz points locator"),
       ),
+
       body: SafeArea(
         child: SplitView(
           viewMode: SplitViewMode.Horizontal,
@@ -45,14 +47,17 @@ class _MainAppPageState extends State<MainAppPage> {
             viewMode: SplitViewMode.Horizontal,
             isActive: true,
           ),
-          children: [
-            ExpandableListWidget(data),
-            MapPointsWidget(data),
-
-          ],
           controller: SplitViewController(weights: [0.3, 0.7],limits: [WeightLimit(min:0.3,max: 0.6)]),
+          children: [
+            ExpandableListWidget(data,zoomToPoint),
+            MapPointsWidget(data,zoomToPointController),
+          ],
         ),
       ),
     );
   }
+  zoomToPoint(SkroutzPoint point){
+    zoomToPointController.zoom(point);
+  }
+
 }
