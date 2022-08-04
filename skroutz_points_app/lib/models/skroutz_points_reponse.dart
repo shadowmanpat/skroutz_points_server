@@ -45,7 +45,7 @@ extension ListSkroutsExtx on List<SkroutzPoint> {
       print(" minLat $minLat maxLat $maxLat minLng $minLng maxLng $maxLng ");
       print("mylist ${LatLngBounds(LatLng(minLat,minLng), LatLng(maxLat,maxLng))}");
       // return LatLngBounds(LatLng(35.01186,19.91975), LatLng(41.50306,28.2225));
-      return LatLngBounds(LatLng(minLat -1,minLng-0.5), LatLng(maxLat+1,maxLng+0.5));
+      return LatLngBounds(LatLng(minLat -0.5,minLng-0.25), LatLng(maxLat+0.5,maxLng+0.25));
     }catch(e){
       print("error $e");
       return LatLngBounds(LatLng(35.01186,19.91975), LatLng(41.50306,28.2225));
