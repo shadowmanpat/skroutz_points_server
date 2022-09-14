@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:html';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -11,7 +10,6 @@ import 'package:skroutz_points_app/models/skroutz_points_reponse.dart';
 Future<SkroutzPointsResponse> fetchPoints({required double lat,required double lng,required double radius}) async {
   var baseUrl = "";
   var apiUrl = "";
-  var origin = window.location.origin;
   if(kIsWeb){
     var origin = window.location.origin;
 //      Uri(url)
